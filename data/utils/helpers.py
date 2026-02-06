@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS snapshots (
   PRIMARY KEY (story_id, snapshot_ts)
 );
 
--- NEW: targeted snapshot schedule (must-capture times)
 CREATE TABLE IF NOT EXISTS snapshot_targets (
   story_id        INTEGER NOT NULL,
   target_ts       INTEGER NOT NULL,        -- unix seconds (desired capture time)
