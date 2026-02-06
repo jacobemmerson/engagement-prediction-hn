@@ -36,7 +36,9 @@ def setup_logging(
 
     # Optional file handler
     if log_file is not None:
-        Path.mkdir("logs", exist_ok=True)
+        log_folder = Path("logs") 
+        log_folder.mkdir(exist_ok=True)
+
         file_handler = logging.FileHandler(f"logs/{log_file}")
         file_handler.setFormatter(format)
         handlers.append(file_handler)

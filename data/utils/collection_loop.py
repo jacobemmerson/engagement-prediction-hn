@@ -44,9 +44,9 @@ async def run_collector(
     conn = init_db(db_path)
     conn.row_factory = sqlite3.Row
 
-    print(f"[info] DB: {db_path}")
-    print(f"[info] Poll: every {poll_seconds}s | max_ids_per_poll={max_ids_per_poll} | snapshot_window_hours={snapshot_window_hours}")
-    print(f"[info] Concurrency={cfg.concurrency} | retries={cfg.max_retries}")
+    logger.info(f"[info] DB: {db_path}")
+    logger.info(f"[info] Poll: every {poll_seconds}s | max_ids_per_poll={max_ids_per_poll} | snapshot_window_hours={snapshot_window_hours}")
+    logger.info(f"[info] Concurrency={cfg.concurrency} | retries={cfg.max_retries}")
 
     connector = aiohttp.TCPConnector(limit=cfg.concurrency)
     async with aiohttp.ClientSession(connector=connector) as session:
@@ -139,7 +139,7 @@ async def run_collector(
                         n_snap += 1
 
             elapsed = time.time() - loop_start
-            print(
+            logger.info(
                 f"[info] {iso_utc(now_ts)} | stories={n_story} targets_enqueued={n_targets} "
                 f"| due_targets={len(due_story_ids)} | snapshots={n_snap} | {elapsed:.1f}s"
             )
